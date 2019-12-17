@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://kit.fontawesome.com/1e19e68466.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Auto Log</title>
+
+    <style>
+        body {
+            background-image: url(/images/gears.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            color: white;
+        }
+
+        .ul-tag ul {
+            list-style-type: none;
+            overflow: hidden;
+            top: 0;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(51, 51, 51);
+            position: fixed;
+            width: 100%;
+            z-index: 10;
+            border: 1px solid black;
+
+        }
+
+        .ul-tag ul li {
+            float: right;
+            border-left: 1px solid black;
+
+        }
+
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 10px 16px;
+            text-decoration: none;
+        }
+
+        li span {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 10px 16px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #111;
+            color: rgb(59, 104, 228);
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: rgb(51, 51, 51);
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            z-index: 20;
+            border-right: 1px solid black;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: rgb(59, 104, 228);
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav p {
+            padding: 8px 8px 8px 30px;
+            font-size: 15px;
+            color: rgb(59, 104, 228);
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
+
+        .container {
+            margin-top: 100px;
+            background-color: rgb(255, 255, 255, 0.4);
+            color: black;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ul-tag">
+        <p>Auto Log</p>
+        <ul>
+            <li><a href="/users/logout"><i class="fas fa-sign-out-alt"></i></a></li>
+            <li><a href="/users/profile"><i class="fas fa-id-card"></i></a></li>
+            <li><a href="/users/home"><i class="fas fa-home"></i></a></li>
+            <li><span onclick="openNav()"><i class="fas fa-bars"></i></span></li>
+        </ul>
+    </div>
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg">
+                <h1>Profile</h1>
+                <h2>Welcome to your profile, {{person.username}}! </h2>
+                <h2> Please type your new password</h2>
+
+                {{#if user}}
+                <p>Welcome, <strong>{{user.username}}</strong> !</p>
+                {{/if}}
+
+                <form method="post" action="/users/profile">
+                    <div style="float:left; width: 250px;">Current password</div><input type="password" name="current"
+                        placeholder="Current Password"><br>
+                    <div style="float:left; width: 250px;">New Password</div><input type="password" name="new1"
+                        id="new1" placeholder="Password"><br>
+                    <div style="float:left; width: 250px;">New Password one more time</div><input type="password"
+                        name="new2" id="new2" placeholder="Password confirmation"><br>
+                    <br>
+                    <div style="float:left; width: 250px;">&nbsp;</div><input type="submit" value="Change Password">
+                </form>
+
+
+                {{#if pass}}
+                <h3 style="color:red;">Your current password is not correct</h3>
+                {{/if}}
+
+                {{#if newpass}}
+                <h3 style="color:red;">Passwords do not match</h3>
+                {{/if}}
+
+                {{#if success}}
+                <h3 style="color:red;">Password changed successfully</h3>
+                {{/if}}
+
+
+            </div>
+
+        </div>
+
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="/users/createEvent">Create Event</a>
+            <a href="/users/uploadpic">Upload Picture </a>
+            <p style="font-size: 25px">Contact:</p>
+            <p>Rsainlus@student.bridgew.edu</p>
+            <p>Sfrancois@student.bridgew.edu</p>
+        </div>
+
+        <script>
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "250px";
+            }
+
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+            }
+        </script>
+</body>
+
+</html>

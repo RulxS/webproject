@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/eec08acf53.js" crossorigin="anonymous"></script>
+
+    <title>Auto Log</title>
+
+    <style>
+        body {
+            background-image: url(/images/cars.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            color: black;
+            margin: 0;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .card {
+            margin-bottom: 50px;
+        }
+
+        .ul-tag ul {
+            list-style-type: none;
+            overflow: hidden;
+            top: 0;
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+            position: fixed;
+            width: 100%;
+            z-index: 10;
+            border: 1px solid black;
+
+        }
+
+        .ul-tag ul li {
+            float: right;
+            border-left: 1px solid black;
+
+        }
+
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 10px 16px;
+            text-decoration: none;
+        }
+
+        li span {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 10px 16px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #111;
+            color: rgb(59, 104, 228);
+        }
+
+        .container {
+            margin-top: 100px;
+            margin-bottom: 30px;
+            color: black;
+        }
+
+        .col-lg-3 ul {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 10px 16px;
+            font-size: 16px;
+            list-style: none;
+            padding: 0;
+            width: 245px;
+            position: fixed;
+            border: 1px solid black;
+            background-color: rgb(51, 51, 51);
+        }
+
+        .col-lg-3 ul li a {
+            text-decoration: none;
+        }
+
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: rgb(51, 51, 51);
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            z-index: 20;
+            border-right: 1px solid black;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: rgb(59, 104, 228);
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav p {
+            padding: 8px 8px 8px 30px;
+            font-size: 15px;
+            color: rgb(59, 104, 228);
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="ul-tag">
+        <p>Auto Log</p>
+        <ul>
+            <li><a href="/users/logout"><i class="fas fa-sign-out-alt"></i></a></li>
+            <li><a href="/users/profile"><i class="fas fa-id-card"></i></a></li>
+            <li><a href="/users/home"><i class="fas fa-home"></i></a></li>
+            <li><span onclick="openNav()"><i class="fas fa-bars"></i></span></li>
+        </ul>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <ul>
+                    <li style="background-color: rgb(59, 104, 228)"><b><i>EVENTS</i></b></li>
+                    <li><a href="/users/carmeets"><b>CAR MEETS</b></a></li>
+                    <li><a href="/users/carshows"><b>CAR SHOWS</b></a></li>
+                    <li><a href="/users/drift"><b>DRIFT</b></a></li>
+                    <li><a href="/users/drag"><b>DRAG</b></a></li>
+                    <li><a href="/users/race"><b>RACE</b></a></li>
+                </ul>
+            </div>
+            <div class="col-lg-9">
+                {{#if imagefile}}
+                {{#each imagefile}}
+                <div class="card card-body md-3">
+                    <img src="/uploadDir/{{this}}">
+                </div>
+                {{/each}}
+                {{/if}}
+            </div>
+
+        </div>
+    </div>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="/users/createEvent">Create Event</a>
+        <a href="/users/uploadpic">Upload Picture </a>
+        <p style="font-size: 25px">Contact:</p>
+        <p>Rsainlus@student.bridgew.edu</p>
+        <p>Sfrancois@student.bridgew.edu</p>
+    </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

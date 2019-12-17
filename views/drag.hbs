@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/eec08acf53.js" crossorigin="anonymous"></script>
+
+
+  <style>
+    .ul-tag ul {
+      list-style-type: none;
+      overflow: hidden;
+      top: 0;
+      margin: 0;
+      padding: 0;
+      background-color: #333;
+      position: fixed;
+      width: 100%;
+      z-index: 10;
+      border: 1px solid black;
+
+    }
+
+    .ul-tag ul li {
+      float: right;
+      border-left: 1px solid black;
+
+    }
+
+
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 10px 16px;
+      text-decoration: none;
+    }
+
+    li span {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 10px 16px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    li a:hover:not(.active) {
+      background-color: #111;
+      color: rgb(59, 104, 228);
+    }
+
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: rgb(51, 51, 51);
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+      z-index: 20;
+      border-right: 1px solid black;
+    }
+
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: rgb(59, 104, 228);
+      display: block;
+      transition: 0.3s;
+    }
+
+    .sidenav p {
+      padding: 8px 8px 8px 30px;
+      font-size: 15px;
+      color: rgb(59, 104, 228);
+      display: block;
+      transition: 0.3s;
+    }
+
+    .sidenav a:hover {
+      color: #f1f1f1;
+    }
+
+    .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+    }
+
+    @media screen and (max-height: 450px) {
+      .sidenav {
+        padding-top: 15px;
+      }
+
+      .sidenav a {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="ul-tag">
+    <p>Auto Log</p>
+    <ul>
+      <li><a href="/users/logout"><i class="fas fa-sign-out-alt"></i></a></li>
+      <li><a href="/users/profile"><i class="fas fa-id-card"></i></a></li>
+      <li><a href="/users/home"><i class="fas fa-home"></i></a></li>
+      <li><span onclick="openNav()"><i class="fas fa-bars"></i></span></li>
+    </ul>
+  </div>
+  <div>
+    <table id="myTable">
+      <thead>
+        <tr>
+          <th>Event</th>
+          <th>Date</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each rows}}
+        <tr>
+          <td> {{ event }}</td>
+          <td> {{ date }}</td>
+          <td> {{ description }}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        $('#myTable').DataTable();
+      });
+    </script>
+  </div>
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="/users/createEvent">Create Event</a>
+    <a href="/users/uploadpic">Upload Picture </a>
+    <p style="font-size: 25px">Contact:</p>
+    <p>Rsainlus@student.bridgew.edu</p>
+    <p>Sfrancois@student.bridgew.edu</p>
+  </div>
+
+  <script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+  </script>
+
+
+</body>
+
+</html>
